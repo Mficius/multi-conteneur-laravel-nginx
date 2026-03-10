@@ -1,0 +1,44 @@
+services:
+  laravel-container:
+    container_name: laravel-app
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/var/www/html
+    ports:
+      - "8000:80"
+    networks:
+      - app-network
+
+  frontend-container:
+    container_name: my-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  nginx:
+    container_name: nginx-server
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - laravel-container
+      - frontend-container
+    networks:
+      - app-network
+      
+
+
+networks:
+    app-network:
+      driver: bridge
+    
