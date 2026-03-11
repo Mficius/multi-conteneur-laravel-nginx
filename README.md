@@ -99,9 +99,9 @@ docker compose version
 ## 2️⃣ Cloner le projet
 
 ```bash
-git clone https://github.com/votre-utilisateur/fullstack-laravel-docker.git
+git clone https://github.com/Mficius/multi-conteneur-laravel-nginx.git
 
-cd fullstack-laravel-docker
+cd docker-react-laravel-app
 ```
 
 ---
