@@ -118,25 +118,6 @@ Docker va :
 * créer le réseau
 * démarrer les conteneurs
 
----
-
-<!-- # ⚙️ Configuration de l'API Laravel
-
-Depuis **Laravel 11**, les routes API ne sont plus activées par défaut.
-
-Exécutez :
-
-```bash
-docker-compose exec laravel-container php artisan install:api
-```
-
-Cela va créer :
-
-```bash
-routes/api.php
-``` -->
-
----
 
 # 🔎 Vérifier les routes Laravel
 
