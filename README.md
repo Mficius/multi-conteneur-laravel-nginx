@@ -73,7 +73,7 @@ Frontend       Backend Laravel
 ├── nginx/
 │   └── default.conf
 │
-└── docker-compose.yml
+└── docker compose.yml
 ```
 
 ---
@@ -109,7 +109,7 @@ cd docker-react-laravel-app
 ## 3️⃣ Lancer l'environnement
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 Docker va :
@@ -122,7 +122,7 @@ Docker va :
 # 🔎 Vérifier les routes Laravel
 
 ```bash
-docker-compose exec laravel-container php artisan route:list
+docker compose exec laravel-container php artisan route:list
 ```
 
 Exemple de sortie :
@@ -216,31 +216,31 @@ Route::get('/test', function () {
 Démarrer les conteneurs
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 Arrêter les conteneurs
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 Reconstruire les conteneurs
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 Accéder au conteneur Laravel
 
 ```bash
-docker-compose exec laravel-container bash
+docker compose exec laravel-container bash
 ```
 
 Voir les logs
 
 ```bash
-docker-compose logs -f
+docker compose logs -f
 ```
 
 ---
