@@ -120,7 +120,7 @@ Docker va :
 
 ---
 
-# ⚙️ Configuration de l'API Laravel
+<!-- # ⚙️ Configuration de l'API Laravel
 
 Depuis **Laravel 11**, les routes API ne sont plus activées par défaut.
 
@@ -134,7 +134,7 @@ Cela va créer :
 
 ```bash
 routes/api.php
-```
+``` -->
 
 ---
 
