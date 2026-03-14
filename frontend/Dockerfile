@@ -1,4 +1,6 @@
-FROM node:25-alpine3.22
+
+# premiere etape : builder l'application react
+FROM node:20-alpine as builder
 
 WORKDIR /app
 
@@ -8,6 +10,14 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+RUN npm run build
 
-CMD [ "node", "index.js"]
+
+# deuxieme etape : servir l'application avec nginx
+FROM nginx:alpine
+
+COPY --from=builder /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

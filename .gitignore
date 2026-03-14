@@ -1,0 +1,5 @@
+# Ignore the .git directory (though Git generally does this automatically)
+.git/
+
+# Ignore node_modules in the frontend directory
+frontend/node_modules/
