@@ -23,7 +23,7 @@ class TodoApiTest extends TestCase
 
         // Assert (vérifications)
         $response->assertStatus(200)
-                 ->assertJsonCount(3);
+                 ->assertJsonCount(10);
     }
 
     /**
