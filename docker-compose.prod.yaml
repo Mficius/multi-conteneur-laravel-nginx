@@ -1,7 +1,7 @@
 services:
   laravel-container:
     container_name: laravel-app
-    image: sigmunddocker/laravel-api:1.0
+    image: cloudopsenglab/laravel-api:latest
     restart: always  
     networks:
       - app-network
