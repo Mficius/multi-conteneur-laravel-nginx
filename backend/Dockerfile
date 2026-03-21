@@ -1,23 +1,59 @@
-FROM php:8.4-apache
+# Etape composer
+
+FROM composer:2 as vendorSave
+
+WORKDIR /app
+
+COPY . .
+
+RUN composer install  \
+    --no-dev  \
+    --optimize-autoloader \
+     --prefer-dist \ 
+     --no-scripts
+
+# Etape php Etape finale
+
+FROM php:8.4-fpm-alpine
+
+RUN apk add --no-cache \
+    bash \
+    curl \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    oniguruma-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    git
+
+RUN docker-php-ext-install pdo \
+    pdo_mysql \
+    mbstring \
+    xml \
+    pcntl \
+    exif \
+    bcmath
+
 
 WORKDIR /var/www/html
 
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libzip-dev \
-    libonig-dev \
-    libjpeg-dev \
-    libxml2-dev \
-    libfreetype6-dev \
-    zip \
-    unzip 
+# copier le dossier vendor
+COPY --from=vendorSave /app . 
 
-RUN docker-php-ext-install pdo pdo_mysql mysqli
-    
-RUN a2enmod rewrite
+# Optimiser laravel
 
-RUN apt-get update -y 
+RUN php artisan package:discover --ansi && \
+    php artisan config:cache || true && \
+    php artisan route:cache || true && \
+    php artisan view:cache || true
 
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN chown -R www-data:www-data /var/www/html
 
+USER www-data
+
+EXPOSE 9000
+
+CMD ["php-fpm"]
