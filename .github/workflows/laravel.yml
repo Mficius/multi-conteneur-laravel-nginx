@@ -95,14 +95,13 @@ jobs:
       #----------------
       - name: Builder image laravel
         run: |
-          docker build -t $DOCKER_USERNAME/laravel-api:latest ./backend
+          docker build -t $DOCKER_USERNAME/laravel-api:${{ github.sha }} ./backend
 
-      - name: Tager mon image laravel
-        run: |
-          docker tag $DOCKER_USERNAME/laravel-api:latest $DOCKER_USERNAME/laravel-api:${{ github.sha }}
+      # - name: Tager mon image laravel
+      #   run: |
+      #     docker tag $DOCKER_USERNAME/laravel-api:latest $DOCKER_USERNAME/laravel-api:${{ github.sha }}
 
       - name: Push Laravel image
         run: |
           docker push $DOCKER_USERNAME/laravel-api:latest
-          docker push $DOCKER_USERNAME/laravel-api:${{ github.sha }}
 
