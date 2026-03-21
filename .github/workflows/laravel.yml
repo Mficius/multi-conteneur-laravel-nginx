@@ -88,14 +88,14 @@ jobs:
 
       # login Docker hub
       - name: Connexion au Docker hub
-        run: echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}"
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}"
 
       # -------------
       # Backend images
       #----------------
       - name: Builder image laravel
         run: |
-          docker build -t $${{ secrets.DOCKER_USERNAME }}/laravel-api:latest ./backend
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/laravel-api:latest ./backend
 
       - name: Tager mon image laravel
         run: |
