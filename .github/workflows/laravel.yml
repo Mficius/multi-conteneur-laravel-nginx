@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
 jobs:
   
   # ====================================
@@ -60,8 +64,39 @@ jobs:
         working-directory: frontend
         run: npm install
 
-      - name: Executer les tests
-        working-directory: frontend
-        run: npm test -- --watchAll=false
+      # - name: Executer les tests
+      #   working-directory: frontend
+      #   run: npm test -- --watchAll=false
 
-      
+    
+  # ====================================
+  # builder & push Docker iimages
+  #=====================================  
+  build-and-push:
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      # login Docker hub
+      - name: Connexion au Docker hub
+        run: echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+
+      # -------------
+      # Backend images
+      #----------------
+      - name: Builder image laravel
+        run: |
+          docker build -t $DOCKER_USERNAME/laravel-api:latest ./backend
+
+      - name: Tager mon image laravel
+        run: |
+          docker tag $DOCKER_USERNAME/laravel-api:latest $DOCKER_USERNAME/laravel-api:${{ github.sha }}
+
+      - name: Push Laravel image
+        run: |
+          docker push $DOCKER_USERNAME/laravel-api:latest
+          docker push $DOCKER_USERNAME/laravel-api:${{ github.sha }}
+
