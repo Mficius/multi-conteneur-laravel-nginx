@@ -112,14 +112,14 @@ jobs:
   # ====================================
   # # SAST (code Security Scan)
   # #=====================================  
-  stats:
-    runs-on: ubuntu-latest
+  # stats:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v6
+  #   steps:
+  #     - uses: actions/checkout@v6
 
-      - name: Exécuter SAST 
-        uses: AppThreat/sast-scan-action@master
+  #     - name: Exécuter SAST 
+  #       uses: AppThreat/sast-scan-action@master
 
 
 
