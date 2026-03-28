@@ -1,5 +1,7 @@
-sonar.projectKey=docker-react-laravel-app
+sonar.projectKey=mficius
 sonar.projectName=FullStack Docker app
+
+sonar.organization=Mficius
 
 sonar.sources=backend,frontend
 

@@ -109,6 +109,19 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
+  # ====================================
+  # # SAST (code Security Scan)
+  # #=====================================  
+  stats:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Exécuter SAST 
+        uses: AppThreat/sast-scan-action@master
+
+
 
     
   # # ====================================
