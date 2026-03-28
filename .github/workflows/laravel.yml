@@ -94,6 +94,13 @@ jobs:
 
     steps: 
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Download coverage
+        uses: actions/download-artifact@v4
+        with:
+          path: .
 
       - name: SonarQube Scan
         uses: sonarSource/sonarqube-scan-action@v2
@@ -174,7 +181,11 @@ jobs:
           docker push $DOCKER_USERNAME/react-frontend:latest
           docker push $DOCKER_USERNAME/react-frontend:${{ github.sha }}
 
-
+        
+  # ====================================
+  # Scan Docker Images (Trivy)
+  #===================================== 
+  
     
 
 
