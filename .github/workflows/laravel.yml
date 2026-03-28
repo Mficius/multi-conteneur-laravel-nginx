@@ -93,7 +93,7 @@ jobs:
     needs: [backend-tests, frontend-tests]
 
     steps: 
-      - uses: actions/checkout@4
+      - uses: actions/checkout@v6
 
       - name: SonarQube Scan
         uses: sonarSource/sonarqube-scan-action@v2
