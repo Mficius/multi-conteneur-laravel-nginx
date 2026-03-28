@@ -89,7 +89,7 @@ jobs:
   # # Sonarqube + qualité gate
   # #=====================================  
   sonar:
-    runs-on: ubtuntu-latest
+    runs-on: ubuntu-latest
     needs: [backend-tests, frontend-tests]
 
     steps: 
@@ -109,7 +109,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
-          
+
     
   # # ====================================
   # # builder & push Docker iimages
