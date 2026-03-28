@@ -84,6 +84,32 @@ jobs:
 
 
   
+
+  # ====================================
+  # # Sonarqube + qualité gate
+  # #=====================================  
+  sonar:
+    runs-on: ubtuntu-latest
+    needs: [backend-tests, frontend-tests]
+
+    steps: 
+      - uses: actions/checkout@4
+
+      - name: SonarQube Scan
+        uses: sonarSource/sonarqube-scan-action@v2
+        env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_HOST_URL:  ${{ secrets.SONAR_HOST_URL }}
+
+
+      - name: Sonarqube code Qualité
+        uses: sonarSource/sonarque-quality-gate-action@v1
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+
+          
     
   # # ====================================
   # # builder & push Docker iimages

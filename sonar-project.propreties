@@ -1,0 +1,10 @@
+sonar.projectKey=docker-react-laravel-app
+sonar.projectName=FullStack Docker app
+
+sonar.sources=backend,frontend
+
+sonar.exclusions=**/nodes_modules/**, **/vendor/**
+
+sonar.language=php,js
+
+sonar.sourceEncoding=UTF-8
