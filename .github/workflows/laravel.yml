@@ -103,7 +103,7 @@ jobs:
 
 
       - name: Sonarqube code Qualité
-        uses: sonarSource/sonarque-quality-gate-action@v1
+        uses: sonarSource/sonarqube-quality-gate-action@v1
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
