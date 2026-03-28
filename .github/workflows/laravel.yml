@@ -102,11 +102,15 @@ jobs:
         with:
           path: .
 
-      - name: SonarQube Scan
-        uses: sonarSource/sonarqube-scan-action@v2
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarqube-scan-action@v2
+        with:
+          args: >
+            -Dsonar.projectKey=mficius_multi-conteneur-laravel-nginx
+            -Dsonar.organization=mficius
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL:  ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: https://sonarcloud.io
  
 
       - name: Sonarqube code Qualité
