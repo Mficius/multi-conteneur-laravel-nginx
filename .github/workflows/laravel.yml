@@ -108,9 +108,9 @@ jobs:
           args: >
             -Dsonar.projectKey=mficius_multi-conteneur-laravel-nginx
             -Dsonar.organization=mficius
+            -Dsonar.host.url=https://sonarcloud.io
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: https://sonarcloud.io
  
 
       - name: Sonarqube code Qualité
