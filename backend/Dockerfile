@@ -26,7 +26,10 @@ RUN apk add --no-cache \
     libxml2-dev \
     zip \
     unzip \
-    git
+    git \
+    $PHPIZE_DEPS
+
+RUN pecl install pcov && docker-php-ext-enable pcov
 
 RUN docker-php-ext-install pdo \
     pdo_mysql \
