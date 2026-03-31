@@ -164,7 +164,7 @@ jobs:
       - name: Scanne l'image larevel
         uses: aquasecurity/trivy-action@0.35.0
         with:
-          image-ref: ${{ secrets.DOCKER_USERNAME }}/laravel-api:latest
+          image-ref: $DOCKER_USERNAME/laravel-api:latest
           format: 'table'
           exit-code: '1'
           severity: 'CRITICAL, HIGH'
@@ -173,7 +173,7 @@ jobs:
       - name: Scanne l'image frontend
         uses: aquasecurity/trivy-action@0.35.0
         with:
-          image-ref: ${{ secrets.DOCKER_USERNAME }}/react-frontend:latest
+          image-ref: $DOCKER_USERNAME/react-frontend:latest
           format: 'table'
           exit-code: '1'
           severity: 'CRITICAL, HIGH'
