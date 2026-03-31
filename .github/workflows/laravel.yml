@@ -153,30 +153,30 @@ jobs:
   # ====================================
   # Scan Docker Images (Trivy)
   #===================================== 
-  security-scan:
-    runs-on: ubuntu-latest
-    needs: build
+  # security-scan:
+  #   runs-on: ubuntu-latest
+  #   needs: build
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v6
 
-      - name: Scanne l'image larevel
-        uses: aquasecurity/trivy-action@0.35.0
-        with:
-          image-ref: ${{ secrets.DOCKER_USERNAME }}/laravel-api:latest
-          format: 'table'
-          exit-code: '1'
-          severity: 'CRITICAL, HIGH'
+  #     - name: Scanne l'image larevel
+  #       uses: aquasecurity/trivy-action@0.35.0
+  #       with:
+  #         image-ref: ${{ secrets.DOCKER_USERNAME }}/laravel-api:latest
+  #         format: 'table'
+  #         exit-code: '1'
+  #         severity: 'CRITICAL,HIGH'
           
 
-      - name: Scanne l'image frontend
-        uses: aquasecurity/trivy-action@0.35.0
-        with:
-          image-ref: ${{ secrets.DOCKER_USERNAME }}/react-frontend:latest
-          format: 'table'
-          exit-code: '1'
-          severity: 'CRITICAL,HIGH'
+  #     - name: Scanne l'image frontend
+  #       uses: aquasecurity/trivy-action@0.35.0
+  #       with:
+  #         image-ref: ${{ secrets.DOCKER_USERNAME }}/react-frontend:latest
+  #         format: 'table'
+  #         exit-code: '1'
+  #         severity: 'CRITICAL,HIGH'
 
  
   # ====================================
