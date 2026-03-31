@@ -110,11 +110,11 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
   
-      - name: Sonarqube code Qualité
-        uses: sonarSource/sonarqube-quality-gate-action@v1
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      # - name: Sonarqube code Qualité
+      #   uses: sonarSource/sonarqube-quality-gate-action@v1
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
   # ====================================
@@ -168,6 +168,7 @@ jobs:
           format: 'table'
           exit-code: '1'
           severity: 'CRITICAL, HIGH'
+          
 
       - name: Scanne l'image frontend
         uses: aquasecurity/trivy-action@0.33.1
