@@ -177,9 +177,9 @@ jobs:
           exit-code: '1'
           severity: 'CRITICAL, HIGH'
 
-
+ 
   # ====================================
-  # Push Docker Images
+  # Push Docker Images to DockerHub
   #===================================== 
   push:
     runs-on: ubuntu-latest
