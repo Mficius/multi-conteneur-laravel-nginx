@@ -167,7 +167,7 @@ jobs:
           image-ref: $DOCKER_USERNAME/laravel-api:latest
           format: 'table'
           exit-code: '1'
-          severity: 'CRITICAL, HIGH'
+          severity: 'CRITICAL,HIGH'
           
 
       - name: Scanne l'image frontend
@@ -176,7 +176,7 @@ jobs:
           image-ref: $DOCKER_USERNAME/react-frontend:latest
           format: 'table'
           exit-code: '1'
-          severity: 'CRITICAL, HIGH'
+          severity: 'CRITICAL,HIGH'
 
  
   # ====================================
@@ -199,6 +199,5 @@ jobs:
          docker push $DOCKER_USERNAME/laravel-api:latest
          docker push $DOCKER_USERNAME/react-frontend:latest
       
-    
-
+  
 
