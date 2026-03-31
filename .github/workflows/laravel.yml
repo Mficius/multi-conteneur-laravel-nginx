@@ -142,41 +142,29 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6      
- 
+
       - name: Builder image laravel
         run: docker build -t $DOCKER_USERNAME/laravel-api:latest ./backend
 
       - name: Builder image frontend
-        run:  docker build -t $DOCKER_USERNAME/react-frontend:latest ./frontend
+        run: docker build -t $DOCKER_USERNAME/react-frontend:latest ./frontend
 
-     
-  # ====================================
-  # Scan Docker Images (Trivy)
-  #===================================== 
-  # security-scan:
-  #   runs-on: ubuntu-latest
-  #   needs: build
+      # Scan juste après build
+      - name: Scan image laravel
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          image-ref: ${{ env.DOCKER_USERNAME }}/laravel-api:latest
+          format: table
+          exit-code: 1
+          severity: CRITICAL,HIGH
 
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v6
-
-  #     - name: Scanne l'image larevel
-  #       uses: aquasecurity/trivy-action@0.35.0
-  #       with:
-  #         image-ref: ${{ secrets.DOCKER_USERNAME }}/laravel-api:latest
-  #         format: 'table'
-  #         exit-code: '1'
-  #         severity: 'CRITICAL,HIGH'
-          
-
-  #     - name: Scanne l'image frontend
-  #       uses: aquasecurity/trivy-action@0.35.0
-  #       with:
-  #         image-ref: ${{ secrets.DOCKER_USERNAME }}/react-frontend:latest
-  #         format: 'table'
-  #         exit-code: '1'
-  #         severity: 'CRITICAL,HIGH'
+      - name: Scan image frontend
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          image-ref: ${{ env.DOCKER_USERNAME }}/react-frontend:latest
+          format: table
+          exit-code: 1
+          severity: CRITICAL,HIGH
 
  
   # ====================================
@@ -184,7 +172,6 @@ jobs:
   #===================================== 
   push:
     runs-on: ubuntu-latest
-    #needs: security-scan
     steps:
       - uses: actions/checkout@v6
 
