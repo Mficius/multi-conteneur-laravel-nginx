@@ -108,6 +108,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
   
       - name: Sonarqube code Qualité
         uses: sonarSource/sonarqube-quality-gate-action@v1
@@ -132,60 +133,71 @@ jobs:
 
     
   # ====================================
-  # builder & push Docker iimages
+  # builder Docker iimages
   #=====================================  
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
-    needs: [backend-tests, frontend-tests]
+    needs: [sonar, stats]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6      
+ 
+      - name: Builder image laravel
+        run: docker build -t $DOCKER_USERNAME/laravel-api:latest ./backend
+
+      - name: Builder image frontend
+        run:  docker build -t $DOCKER_USERNAME/react-frontend:latest ./frontend
+
+     
+  # ====================================
+  # Scan Docker Images (Trivy)
+  #===================================== 
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: build
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Login to Docker Hub
+      - name: Scanne l'image larevel
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          image-ref: ${{ secrets.DOCKER_USERNAME }}/laravel-api:latest
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL, HIGH'
+
+      - name: Scanne l'image frontend
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          image-ref: ${{ secrets.DOCKER_USERNAME }}/react-frontend:latest
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL, HIGH'
+
+
+  # ====================================
+  # Push Docker Images
+  #===================================== 
+  push:
+    runs-on: ubuntu-latest
+    needs: security-scan
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
- 
-      # -------------
-      # Backend images
-      #----------------
-      - name: Builder image laravel
-        run: |
-          docker build -t $DOCKER_USERNAME/laravel-api:latest ./backend
 
-      - name: Tager mon image laravel
+      - name: Pusher les images
         run: |
-          docker tag $DOCKER_USERNAME/laravel-api:latest  $DOCKER_USERNAME/laravel-api:${{ github.sha }}
-
-      - name: Push Laravel image
-        run: |
-          docker push $DOCKER_USERNAME/laravel-api:latest
-          docker push $DOCKER_USERNAME/laravel-api:${{ github.sha }}
-
+         docker push $DOCKER_USERNAME/laravel-api:latest
+         docker push $DOCKER_USERNAME/react-frontend:latest
       
-       # -------------
-      # Frontend images
-      #----------------
-      - name: Builder image frontend
-        run: |
-          docker build -t $DOCKER_USERNAME/react-frontend:latest ./frontend
-
-      - name: Tager mon image laravel
-        run: |
-          docker tag $DOCKER_USERNAME/react-frontend:latest  $DOCKER_USERNAME/react-frontend:${{ github.sha }}
-
-      - name: Push Laravel image
-        run: |
-          docker push $DOCKER_USERNAME/react-frontend:latest
-          docker push $DOCKER_USERNAME/react-frontend:${{ github.sha }}
-
-        
-  # ====================================
-  # Scan Docker Images (Trivy)
-  #===================================== 
-  
     
 
 
