@@ -149,15 +149,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-
-      - name: Set tag
-        run: echo "TAG=${GITHUB_SHA}" >> $GITHUB_ENV
-
       - name: Builder image laravel
-        run: docker build -t $DOCKER_USERNAME/laravel-api:$TAG . ./backend
+        run: docker build -t $DOCKER_USERNAME/laravel-api:latest ./backend
 
       - name: Builder image frontend
-        run: docker build -t $DOCKER_USERNAME/react-frontend:$TAG ./frontend
+        run: docker build -t $DOCKER_USERNAME/react-frontend:latest ./frontend
 
       # Scan juste après build
       - name: Scan image laravel
@@ -176,12 +172,11 @@ jobs:
           exit-code: 1
           severity: CRITICAL,HIGH
 
-     
 
       - name: Pusher les images
         run: |
-         docker push $DOCKER_USERNAME/laravel-api:$TAG
-         docker push $DOCKER_USERNAME/react-frontend:$TAG
+         docker push $DOCKER_USERNAME/laravel-api:latest
+         docker push $DOCKER_USERNAME/react-frontend:latest
 
 
 
