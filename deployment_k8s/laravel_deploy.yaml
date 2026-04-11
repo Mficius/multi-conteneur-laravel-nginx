@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-nginx
+  namespace: cloudops-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: laravel-nginx
+  template:
+    metadata:
+      labels:
+        app: laravel-nginx
+    spec:
+
+      # Copier le code Laravel dans le volume partagé
+      initContainers:
+        - name: copy-laravel-code
+          image: cloudopsenglab/laravel-api:latest
+          command: ["sh", "-c", "cp -a /var/www/html/. /shared/ && chown -R www-data:www-data /shared/storage /shared/bootstrap/cache"]
+          volumeMounts:
+            - name: app-code
+              mountPath: /shared
+
+        # 2. Run Migrations 
+        - name: run-migrations
+          image: cloudopsenglab/laravel-api:latest
+          command: ["sh", "-c", "until nc -z -v -w30 mysql 3306; do echo 'Waiting for MySQL...'; sleep 2; done; php artisan migrate --force"]
+          env:
+            - name: DB_CONNECTION
+              value: mysql
+            - name: DB_HOST
+              value: mysql
+            - name: DB_DATABASE
+              value: todo_db
+            - name: DB_USERNAME
+              value: root
+            - name: DB_PASSWORD
+              value: root
+          volumeMounts:
+            - name: app-code
+              mountPath: /var/www/html
+
+      securityContext:
+        fsGroup: 33
+
+      containers:
+
+        # 🔹 NGINX
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: app-code
+              mountPath: /var/www/html
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+
+        # 🔹 PHP-FPM
+        - name: laravel
+          image: cloudopsenglab/laravel-api:latest
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - name: app-code
+              mountPath: /var/www/html
+          env:
+            - name: DB_CONNECTION
+              value: mysql
+            - name: DB_HOST
+              value: mysql
+            - name: DB_DATABASE
+              value: todo_db       
+            - name: DB_USERNAME
+              value: root
+            - name: DB_PASSWORD
+              value: root           
+            - name: APP_KEY
+              value: "base64:3XCp35gwua8IFs0gk/caQElCKNv4EATsSScz17vJ6lI="
+
+      volumes:
+        - name: app-code
+          emptyDir: {}
+
+        - name: nginx-config
+          configMap:
+            name: nginx-config

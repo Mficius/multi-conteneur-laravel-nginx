@@ -1,0 +1,73 @@
+# Git
+**/.git
+**/.gitignore
+**/.gitattributes
+
+# Node modules
+**/node_modules
+npm-debug.log
+yarn-error.log
+
+# Logs
+*.log
+storage/logs/*
+!storage/logs/.gitkeep
+
+# IDE et éditeurs
+.vscode
+.idea
+.DS_Store
+*.swp
+*.swo
+*~
+.env.local
+.env.*.local
+
+# Dépendances PHP
+vendor/
+
+# Cache et temporaires
+bootstrap/cache/*
+!bootstrap/cache/.gitkeep
+storage/framework/cache/*
+!storage/framework/cache/.gitkeep
+storage/framework/sessions/*
+!storage/framework/sessions/.gitkeep
+storage/framework/views/*
+!storage/framework/views/.gitkeep
+
+# Fichiers de test et CI
+tests/
+phpunit.xml
+.phpunit.cache
+coverage/
+
+# Docker
+Dockerfile.dev
+docker-compose.dev.yaml
+docker-compose.yml
+docker-compose.yaml
+.dockerignore
+
+# Configuration dev et test
+.env
+.env.example
+.env.testing
+.editorconfig
+
+# Fichiers temporaires
+*.tmp
+*.temp
+.tmp/
+
+# Kubernetes
+deployment_k8s/
+*.yaml
+*.yml
+
+# Divers
+README.md
+sonar-project.properties
+frontend/
+nginx/
+!README.md
