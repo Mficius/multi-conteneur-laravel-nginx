@@ -14,7 +14,7 @@ RUN composer install  \
 
 # Etape php Etape finale
 
-FROM php:8.4-fpm-alpine
+FROM php:8.4.20-fpm-alpine
 
 RUN apk add --no-cache \
     bash \
