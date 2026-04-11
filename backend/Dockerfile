@@ -14,7 +14,7 @@ RUN composer install  \
 
 # Etape php Etape finale
 
-FROM php:8.4.20-fpm-alpine
+FROM php:8.4-fpm-alpine3.23
 
 RUN apk add --no-cache \
     bash \
@@ -27,7 +27,9 @@ RUN apk add --no-cache \
     zip \
     unzip \
     git \
-    $PHPIZE_DEPS
+    $PHPIZE_DEPS \
+ && apk update && apk upgrade --no-cache
+
 
 RUN pecl install pcov && docker-php-ext-enable pcov
 
