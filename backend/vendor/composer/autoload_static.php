@@ -534,6 +534,8 @@ class ComposerStaticInit15d447df9aca2d5038714faaf411be98
 
     public static $classMap = array (
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\TodoController' => __DIR__ . '/../..' . '/app/Http/Controllers/TodoController.php',
+        'App\\Models\\Todo' => __DIR__ . '/../..' . '/app/Models/Todo.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
@@ -658,6 +660,7 @@ class ComposerStaticInit15d447df9aca2d5038714faaf411be98
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'Database\\Factories\\TodoFactory' => __DIR__ . '/../..' . '/database/factories/TodoFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
@@ -6918,6 +6921,7 @@ class ComposerStaticInit15d447df9aca2d5038714faaf411be98
         'Termwind\\ValueObjects\\Style' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Style.php',
         'Termwind\\ValueObjects\\Styles' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Styles.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
+        'Tests\\Feature\\TodoApiTest' => __DIR__ . '/../..' . '/tests/Feature/TodoApiTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',

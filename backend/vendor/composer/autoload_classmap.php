@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\TodoController' => $baseDir . '/app/Http/Controllers/TodoController.php',
+    'App\\Models\\Todo' => $baseDir . '/app/Models/Todo.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
@@ -131,6 +133,7 @@ return array(
     'Cron\\HoursField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
     'Cron\\MinutesField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
     'Cron\\MonthField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+    'Database\\Factories\\TodoFactory' => $baseDir . '/database/factories/TodoFactory.php',
     'Database\\Factories\\UserFactory' => $baseDir . '/database/factories/UserFactory.php',
     'Database\\Seeders\\DatabaseSeeder' => $baseDir . '/database/seeders/DatabaseSeeder.php',
     'DateError' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
@@ -6391,6 +6394,7 @@ return array(
     'Termwind\\ValueObjects\\Style' => $vendorDir . '/nunomaduro/termwind/src/ValueObjects/Style.php',
     'Termwind\\ValueObjects\\Styles' => $vendorDir . '/nunomaduro/termwind/src/ValueObjects/Styles.php',
     'Tests\\Feature\\ExampleTest' => $baseDir . '/tests/Feature/ExampleTest.php',
+    'Tests\\Feature\\TodoApiTest' => $baseDir . '/tests/Feature/TodoApiTest.php',
     'Tests\\TestCase' => $baseDir . '/tests/TestCase.php',
     'Tests\\Unit\\ExampleTest' => $baseDir . '/tests/Unit/ExampleTest.php',
     'TheSeer\\Tokenizer\\Exception' => $vendorDir . '/theseer/tokenizer/src/Exception.php',
