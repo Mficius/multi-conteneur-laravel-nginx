@@ -4,14 +4,21 @@ FROM composer:2 as vendorSave
 
 WORKDIR /app
 
-COPY . .
+COPY composer.json composer.lock ./
 
+# 2. Installer les dépendances (cette étape restera en cache si vos dépendances ne changent pas)
 RUN composer install  \
     --no-dev  \
     --optimize-autoloader \
-     --prefer-dist \ 
-     --no-scripts
+    --prefer-dist \ 
+    --no-scripts \
+    --no-autoloader
 
+# 3. Copier le reste du code source de l'application
+COPY . .
+
+# 4. Générer l'autoloader final avec votre code
+RUN composer dump-autoload --optimize --no-dev
 # Etape php Etape finale
 
 FROM php:8.4-fpm-alpine3.23
