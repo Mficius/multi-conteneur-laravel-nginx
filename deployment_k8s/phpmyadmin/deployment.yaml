@@ -14,12 +14,10 @@ spec:
         app: phpmyadmin
     spec:
       containers:
-      - name: phpmyadmin
-        image: phpmyadmin/phpmyadmin:5
-        ports:
-        - containerPort: 80
-        env:
-        - name: PMA_HOST
-          value: mysql
-        ports:
-        - containerPort: 80
+        - name: phpmyadmin
+          image: phpmyadmin:latest
+          env:
+            - name: PMA_HOST
+              value: mysql           
+          ports:
+            - containerPort: 80
