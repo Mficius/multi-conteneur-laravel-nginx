@@ -12,10 +12,12 @@ resources:
   - backend/deployment.yaml
   - backend/service.yaml
   - backend/ingress.yaml
+  - backend/servicemonitor.yaml
 
   - frontend/deployment.yaml
   - frontend/service.yaml
   - frontend/ingress.yaml
+  - frontend/servicemonitor.yaml
 
   - phpmyadmin/deployment.yaml
   - phpmyadmin/service.yaml

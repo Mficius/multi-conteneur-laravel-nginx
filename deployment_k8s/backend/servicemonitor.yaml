@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+
+metadata:
+  name: laravel-monitor
+  namespace: monitoring
+
+spec:
+  namespaceSelector:
+    matchNames:
+      - cloudops-app
+
+  selector:
+    matchLabels:
+      app: laravel-nginx
+
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
